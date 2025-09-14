@@ -5,13 +5,13 @@ const NotificationBox: React.FC = () => {
   return (
     <>
       <MainContainer>
-        <div className="header-container">
-          <div className="separator-container">
-            <h1>Notifications</h1>
-            <div className="notification-num">3</div>
-          </div>
-          <button>Mark all as read</button>
-        </div>
+        <HeaderContainer>
+          <SeparatorContainer>
+            <NotificationsLogo>Notifications</NotificationsLogo>
+            <NotificationsNum>3</NotificationsNum>
+          </SeparatorContainer>
+          <MarkingButton>Mark all as read</MarkingButton>
+        </HeaderContainer>
         <Notification />
       </MainContainer>
     </>
@@ -25,45 +25,45 @@ const MainContainer = styled.div`
   width: 100%;
   height: 100vh;
   padding: 24px 16px;
+`;
 
-  .header-container {
-    width: 100%;
-    height: 25px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 24px;
-  }
+const HeaderContainer = styled.div`
+  width: 100%;
+  height: 25px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+`;
 
-  h1 {
-    font-size: 20px;
-    font-weight: 800;
-    margin-right: 9px;
-  }
+const SeparatorContainer = styled.div`
+  width: auto;
+  height: 25px;
+  display: flex;
+`;
 
-  .notification-num {
-    width: 32px;
-    height: 100%;
-    border-radius: 6px;
-    background: #0a327b;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 800;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+const NotificationsLogo = styled.h1`
+  font-size: 20px;
+  font-weight: 800;
+  margin-right: 9px;
+`;
 
-  button {
-    background: none;
-    border: none;
-    color: #5e6778;
-    font-size: 14px;
-    font-weight: 500;
-  }
+const NotificationsNum = styled.div`
+  width: 32px;
+  height: 100%;
+  border-radius: 6px;
+  background: #0a327b;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-  .separator-container {
-    width: auto;
-    height: 25px;
-    display: flex;
-  }
+const MarkingButton = styled.button`
+  background: none;
+  border: none;
+  color: #5e6778;
+  font-size: 14px;
+  font-weight: 500;
 `;
