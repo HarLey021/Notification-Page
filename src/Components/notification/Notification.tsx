@@ -60,7 +60,7 @@ const notifications: NotificationInterface[] = [
   },
   {
     id: 6,
-    avatar: "public/images/avatar-nathan-peterson.webp",
+    avatar: "/images/avatar-nathan-peterson.webp",
     fullName: "Nathan Peterson",
     action: "reacted to your recent post",
     status: "unread",
@@ -78,11 +78,22 @@ const notifications: NotificationInterface[] = [
   },
 ];
 
+const markAllAsRead = (): void => {
+  notifications.forEach((item) => {
+    item.status = "read";
+  });
+};
+
 const Notification: React.FC = () => {
   return (
     <>
       {notifications.map((item: NotificationInterface) => (
-        <Box key={item.id}>
+        <Box
+          key={item.id}
+          style={{
+            backgroundColor: item.status === "unread" ? "#f7fafd" : "none",
+          }}
+        >
           <Avatar src={item.avatar} alt={`${item.fullName} photo`} />
           <div>
             <Content>
@@ -100,7 +111,7 @@ const Notification: React.FC = () => {
             <Time>{item.time}</Time>
           </div>
           {item.picture ? (
-            <Picture src="public/images/image-chess.webp"></Picture>
+            <Picture src="/images/image-chess.webp"></Picture>
           ) : (
             ""
           )}
@@ -115,7 +126,7 @@ export default Notification;
 const Box = styled.div`
   width: 100%;
   height: auto;
-  background-color: #f7fafd;
+  /* background-color: #f7fafd; */
   border-radius: 8px;
   padding: 16px;
   display: flex;
