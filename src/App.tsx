@@ -1,10 +1,10 @@
 import GlobalStyle from "./Styles/GlobalStyles";
-
+import NotificationBox from "./Components/notifcation box/NotificationBox";
 function App() {
   return (
     <>
       <GlobalStyle />
-      <h1>Hello</h1>
+      <NotificationBox />
     </>
   );
 }
