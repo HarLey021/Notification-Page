@@ -29,10 +29,12 @@ const NotificationBox: React.FC = () => {
             Mark all as read
           </MarkingButton>
         </HeaderContainer>
-        <Notification
-          notificationList={notificationList}
-          setNotificationList={setNotificationList}
-        />
+        <div className="sep">
+          <Notification
+            notificationList={notificationList}
+            setNotificationList={setNotificationList}
+          />
+        </div>
       </MainContainer>
     </>
   );
@@ -43,28 +45,40 @@ export default NotificationBox;
 const MainContainer = styled.div`
   background-color: #fff;
   width: 100%;
-  height: 100vh;
-  padding: 24px 16px;
+  min-height: 100dvh;
+  padding: 0 16px;
+
+  .sep {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 16px 24px;
+    -webkit-overflow-scrolling: touch;
+  }
 
   @media (min-width: 1080px) {
     width: 730px;
     height: auto;
     border-radius: 15px;
     box-shadow: 0 20px 60px 0 rgba(73, 97, 168, 0.05);
-    padding: 33px;
   }
 `;
 
 const HeaderContainer = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 10;
   width: 100%;
-  height: 25px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 48px;
+  padding-top: 24px;
+  background-color: #fff;
 
   @media (min-width: 1080px) {
     height: 30px;
     margin-bottom: 31px;
+    padding-top: 33px;
   }
 `;
 
