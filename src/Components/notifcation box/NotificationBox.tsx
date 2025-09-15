@@ -52,6 +52,12 @@ const MainContainer = styled.div`
     flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .sep::-webkit-scrollbar {
+    display: none;
   }
 
   @media (min-width: 1080px) {
@@ -62,13 +68,6 @@ const MainContainer = styled.div`
     height: 839px;
     border-radius: 15px;
     box-shadow: 0 20px 60px 0 rgba(73, 97, 168, 0.05);
-
-    .sep {
-      flex: 1;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 1rem;
-    }
   }
 `;
 
