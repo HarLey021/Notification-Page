@@ -73,6 +73,7 @@ const HeaderContainer = styled.div`
   margin-bottom: 24px;
   padding-top: 24px;
   background-color: #fff;
+  border-bottom: 1px solid #dde7ee;
 
   @media (min-width: 1080px) {
     height: 70px;
