@@ -1,114 +1,45 @@
 import styled from "styled-components";
+import type { NotificationInterface } from "../../data";
 
-interface NotificationInterface {
-  id: number;
-  avatar: string;
-  fullName: string;
-  action: string;
-  status: string;
-  event?: string;
-  content?: string;
-  picture?: string;
-  time: string;
-}
+const Notification: React.FC<{
+  notificationList: NotificationInterface[];
+  setNotificationList: React.Dispatch<
+    React.SetStateAction<NotificationInterface[]>
+  >;
+}> = ({ notificationList, setNotificationList }) => {
+  const handleOpening = (id: number): void => {
+    const updated = notificationList.map((item) =>
+      item.id === id ? { ...item, status: "read" } : item
+    );
+    setNotificationList(updated);
+  };
 
-const notifications: NotificationInterface[] = [
-  {
-    id: 1,
-    avatar: "/images/avatar-mark-webber.webp",
-    fullName: "Mark Webber",
-    action: "reacted to your recent post",
-    status: "unread",
-    event: "My first tournament today!",
-    time: "1m ago",
-  },
-  {
-    id: 2,
-    avatar: "/images/avatar-angela-gray.webp",
-    fullName: "Angela Gray",
-    action: "followed you",
-    status: "unread",
-    time: "5m ago",
-  },
-  {
-    id: 3,
-    avatar: "/images/avatar-jacob-thompson.webp",
-    fullName: "Jacob Thompson",
-    action: "has joined your group",
-    status: "unread",
-    event: "Chess Club",
-    time: "1 day ago",
-  },
-  {
-    id: 4,
-    avatar: "/images/avatar-rizky-hasanuddin.webp",
-    fullName: "Rizky Hasanuddin",
-    action: "sent you a private message",
-    status: "unread",
-    content:
-      "Hello, thanks for setting up the Chess Club. I’ve been a member for a few weeks now and I’m already having lots of fun and improving my game.",
-    time: "5 days ago",
-  },
-  {
-    id: 5,
-    avatar: "/images/avatar-kimberly-smith.webp",
-    fullName: "Kimberly Smith",
-    action: "commented on your picture",
-    status: "unread",
-    time: "1 week ago",
-    picture: "/images/image-chess.webp",
-  },
-  {
-    id: 6,
-    avatar: "/images/avatar-nathan-peterson.webp",
-    fullName: "Nathan Peterson",
-    action: "reacted to your recent post",
-    status: "unread",
-    event: "5 end-game strategies to increase your win rate",
-    time: "2 weeks ago",
-  },
-  {
-    id: 7,
-    avatar: "/images/avatar-anna-kim.webp",
-    fullName: "Anna Kim",
-    action: "left the group",
-    status: "unread",
-    event: "Chess Club",
-    time: "2 weeks ago",
-  },
-];
-
-const markAllAsRead = (): void => {
-  notifications.forEach((item) => {
-    item.status = "read";
-  });
-};
-
-const Notification: React.FC = () => {
   return (
     <>
-      {notifications.map((item: NotificationInterface) => (
+      {notificationList.map((item: NotificationInterface) => (
         <Box
           key={item.id}
-          style={{
-            backgroundColor: item.status === "unread" ? "#f7fafd" : "none",
-          }}
+          unread={item.status === "unread"}
+          onClick={() => handleOpening(item.id)}
         >
           <Avatar src={item.avatar} alt={`${item.fullName} photo`} />
           <div>
-            <Content>
-              <Name>{item.fullName}</Name>
-              <Action> {item.action}</Action>
-              <Event
-                style={{
-                  color: item.event === "Chess Club" ? "#0A327B" : "#5e6778",
-                }}
-              >
-                {item.event}
-              </Event>
-              <RedDot></RedDot>
-            </Content>
-            <Time>{item.time}</Time>
+            <div>
+              <Content>
+                <Name>{item.fullName}</Name>
+                <Action> {item.action}</Action>
+                <Event isChess={item.event === "Chess Club"}>
+                  {item.event}
+                </Event>
+                <RedDot isOpened={item.status === "read"}></RedDot>
+              </Content>
+              <Time>{item.time}</Time>
+            </div>
+            {item.content && item.status === "read" ? (
+              <Message>{item.content}</Message>
+            ) : (
+              ""
+            )}
           </div>
           {item.picture ? (
             <Picture src="/images/image-chess.webp"></Picture>
@@ -123,20 +54,29 @@ const Notification: React.FC = () => {
 
 export default Notification;
 
-const Box = styled.div`
+const Box = styled.div<{ unread?: boolean }>`
   width: 100%;
   height: auto;
-  /* background-color: #f7fafd; */
+  background-color: ${(props) => (props.unread ? "#F7FAFD" : "transparent")};
   border-radius: 8px;
   padding: 16px;
   display: flex;
   gap: 13px;
   margin-bottom: 10px;
+
+  @media (min-width: 1080px) {
+    padding: 18px 20px;
+  }
 `;
 
 const Avatar = styled.img`
   width: 39px;
   height: 39px;
+
+  @media (min-width: 1080px) {
+    width: 45px;
+    height: 45px;
+  }
 `;
 
 const Content = styled.p`
@@ -148,6 +88,15 @@ const Name = styled.span`
   font-size: 14px;
   font-weight: 800;
   margin-right: 4px;
+
+  @media (min-width: 1080px) {
+    font-size: 16px;
+  }
+
+  &:hover {
+    color: #0a327b;
+    cursor: pointer;
+  }
 `;
 
 const Action = styled.span`
@@ -155,17 +104,30 @@ const Action = styled.span`
   font-size: 14px;
   font-weight: 500;
   margin-right: 4px;
+
+  @media (min-width: 1080px) {
+    font-size: 16px;
+  }
 `;
 
-const Event = styled.span`
-  color: #5e6778;
+const Event = styled.span<{ isChess?: boolean }>`
+  color: ${(props) => (props.isChess ? "#0A327B" : "#5e6778")};
   font-size: 14px;
   font-weight: 800;
   margin-right: 4px;
+
+  @media (min-width: 1080px) {
+    font-size: 16px;
+  }
+
+  &:hover {
+    color: #0a327b;
+    cursor: pointer;
+  }
 `;
 
-const RedDot = styled.span`
-  display: inline-block;
+const RedDot = styled.span<{ isOpened?: boolean }>`
+  display: ${(props) => (props.isOpened ? "none" : "inline-block")};
   width: 8px;
   height: 8px;
   background-color: #f65552;
@@ -177,10 +139,42 @@ const Time = styled.h6`
   color: #939cad;
   font-size: 14px;
   font-weight: 500;
+  margin-bottom: 12px;
+
+  @media (min-width: 1080px) {
+    font-size: 16px;
+  }
 `;
 
 const Picture = styled.img`
   width: 39px;
   height: 39px;
   border-radius: 7px;
+  margin-left: auto;
+
+  @media (min-width: 1080px) {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-self: flex-start;
+  }
+`;
+
+const Message = styled.div`
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #dde7ee;
+  color: #5e6778;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 16px;
+
+  @media (min-width: 1080px) {
+    font-size: 16px;
+    padding: 20px;
+  }
+
+  &:hover {
+    background: #e5effa;
+  }
 `;

@@ -12,6 +12,13 @@ const GlobalStyle = createGlobalStyle`
     body{
         font-family: "Plus Jakarta Sans", sans-serif;
         background-color: #F9FAFD;
+        
+        @media(min-width: 1080px){
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 65px;
+        }
     }
 `;
 
