@@ -51,7 +51,6 @@ const MainContainer = styled.div`
   .sep {
     flex: 1;
     overflow-y: auto;
-    padding: 0 16px 24px;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -68,15 +67,15 @@ const HeaderContainer = styled.div`
   top: 0;
   z-index: 10;
   width: 100%;
-  height: 50px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
   padding-top: 24px;
   background-color: #fff;
 
   @media (min-width: 1080px) {
-    height: 30px;
+    height: 70px;
     margin-bottom: 31px;
     padding-top: 33px;
   }
