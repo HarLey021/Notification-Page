@@ -48,7 +48,7 @@ const MainContainer = styled.div`
 
   @media (min-width: 1080px) {
     width: 730px;
-    height: 840px;
+    height: auto;
     border-radius: 15px;
     box-shadow: 0 20px 60px 0 rgba(73, 97, 168, 0.05);
     padding: 33px;

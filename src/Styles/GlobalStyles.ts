@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
         justify-content: center;
         align-items: center;
         padding-top: 65px;
+        padding-bottom: 90px;
         }
     }
 `;
