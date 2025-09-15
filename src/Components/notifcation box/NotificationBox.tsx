@@ -55,10 +55,20 @@ const MainContainer = styled.div`
   }
 
   @media (min-width: 1080px) {
+    display: flex;
+    flex-direction: column;
     width: 730px;
-    min-height: 839px;
+    min-height: 0;
+    height: 839px;
     border-radius: 15px;
     box-shadow: 0 20px 60px 0 rgba(73, 97, 168, 0.05);
+
+    .sep {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 1rem;
+    }
   }
 `;
 
