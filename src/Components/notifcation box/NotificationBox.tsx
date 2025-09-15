@@ -45,7 +45,7 @@ export default NotificationBox;
 const MainContainer = styled.div`
   background-color: #fff;
   width: 100%;
-  height: 100vh;
+  min-height: 100dvh;
   padding: 0 16px;
 
   .sep {
@@ -56,7 +56,7 @@ const MainContainer = styled.div`
 
   @media (min-width: 1080px) {
     width: 730px;
-    height: auto;
+    min-height: 839px;
     border-radius: 15px;
     box-shadow: 0 20px 60px 0 rgba(73, 97, 168, 0.05);
   }
