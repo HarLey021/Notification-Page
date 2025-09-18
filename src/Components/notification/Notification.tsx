@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import type { NotificationInterface } from "../../data";
 
 const Notification: React.FC<{
   notificationList: NotificationInterface[];

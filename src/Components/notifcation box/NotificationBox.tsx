@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Notification from "../notification/Notification";
-import notifications from "../../data";
-import type { NotificationInterface } from "../../data";
+import notifications from "../../data.json";
 import { useState } from "react";
 
 const NotificationBox: React.FC = () => {
